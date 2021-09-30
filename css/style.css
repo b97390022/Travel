@@ -1,0 +1,217 @@
+@font-face {
+    font-family: 'PingFangTC-Regular';
+    src: url('../fonts/PingFang-TC-Regular-2.otf') format("truetype");
+}
+
+@font-face {
+    font-family: 'SFNSDisplay';
+    src: url('../fonts/SFNS-Display-Regular.ttf') format("truetype");
+}
+
+.wrap {
+    width: 1024px;
+    margin: 0 auto;
+    background-color: #f5f5f5;
+}
+
+.header{
+    background: no-repeat url("../images/the-urban-landscape-1698285.png") top/100% 380px;
+    height: 500px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 89px;
+    position: relative;
+    /* justify-content: center; */
+    /* background: #424242; */
+}
+
+.header h1{
+    font-family: PingFangTC-Regular;
+    font-size: 40px;
+    color: #FFFFFF;
+    letter-spacing: 3.89px;
+    padding-bottom: 96px;
+}
+
+#dropDownList {
+    width: 452px;
+    height: 48px;
+    background: rgba(255,255,255,0.70);
+    border: 3px solid #FFFFFF;
+    border-radius: 3px;
+    position: relative;
+    padding-left: 9.5px;
+    margin-bottom: 79px;
+    user-select: none;
+}
+
+.ddis{
+    position: absolute;
+    text-indent: 9.5px;
+    top: 15px;
+    font-family: PingFangTC-Regular;
+    font-weight: bold;
+    font-size: 18px;
+    color: #000000;
+    line-height: 21px;
+}
+
+.dicon{
+    position: absolute;
+    right: 17px;
+    bottom: 17px;
+}
+
+.dropDownUl{
+    display: none;
+    width: 452px;
+    left: -3px;
+    top: 48px;
+    background: rgba(255,255,255,0.70);
+    border: 3px solid #FFFFFF;
+    border-radius: 3px;
+    position: absolute;
+    padding-left: 9.5px;
+    user-select: none;
+    z-index: 15;
+    animation: growDown 2000ms ease-in-out forwards;
+    transform-origin: top center;
+}
+
+.dropDownUl > li{
+    height: 48px;
+    text-align: center;
+    font-family: PingFangTC-Regular;
+    font-weight: bold;
+    font-size: 18px;
+    color: #000000;
+    line-height: 48px;   
+}
+
+@keyframes growDown {
+    0% {
+        transform: scaleY(0)
+    }
+    80% {
+        transform: scaleY(1.1)
+    }
+    100% {
+        transform: scaleY(1)
+    }
+}
+
+.hot{
+    width: 800px;
+    height: 112px;
+    background: #FFFFFF;
+    box-shadow: 0 1px 3px 0 rgba(0,0,0,0.20);
+    border-radius: 5px;
+}
+
+.hot h2{
+    font-family: AppleSystemUIFont;
+    font-size: 18px;
+    color: #000000;
+    margin: 20px 0px 14px 26px;
+}
+
+.hot ul{
+    display: flex;
+    font-family: PingFangTC-Regular;
+    font-size: 20px;
+    color: #FFFFFF;
+    text-align: center;
+    line-height: 42px;
+    margin-left: 51px;
+}
+
+.hot ul li{
+    width: 130px; 
+    height: 42px;
+    border-radius: 5px;
+    margin-right: 30px;
+    user-select: none;
+}
+
+.hot ul li:nth-child(1){
+    background: #8A82CC;
+}
+.hot ul li:nth-child(2){
+    background: #FFA782;
+}
+.hot ul li:nth-child(3){
+    background: #F5D105;
+}
+.hot ul li:nth-child(4){
+    background: #559AC8;
+}
+
+.header-line{
+    position: absolute;
+    bottom: 0;
+    height: 1px;
+    width: 900px;
+    border: none;
+    border-top: 1px dashed #559AC8;
+    border-spacing:10px;
+}
+
+.triangle{
+    width: 0px;
+    height: 0px;
+    position: absolute;
+    bottom: 0px;
+    border-style: solid;
+    border-width: 11px 8px 0px 8px;
+    border-color: #559AC8 transparent transparent transparent;
+    z-index: 10;
+}
+
+.circle{
+    width: 24px;
+    height: 24px;
+    position: absolute;
+    bottom: -6px;
+    border-radius: 999em;
+    border: 2px solid #559AC8;
+    background-color: #f5f5f5;
+    z-index: 5;
+}
+
+.main{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.main > h2{
+    font-family: SFNSDisplay;
+    font-size: 36px;
+    color: #8A82CC;
+    margin-top: 76px;
+    margin-bottom: 24px;
+}
+
+
+
+
+.footer{
+    height: 90px;
+    background: #559AC8;
+    font-family: AppleSystemUIFont;
+    font-size: 14px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.footer > span:nth-child(1){
+    color: #FFFFFF;
+    margin-bottom: 15px;
+}
+
+.footer > span:nth-child(2){
+    color: #FFD366;
+}
