@@ -43,6 +43,10 @@ var sectorArr = [
     "大寮區",
 
 ]
+var ddis = document.querySelector(".ddis");
+
+getTravelInfo();
+
 for (var i =0; i< sectorArr.length; i++) {
     var liNode = document.createElement('li');
     liNode.textContent = sectorArr[i];
@@ -66,14 +70,18 @@ for (var i =0; i< sectorArr.length; i++) {
 
 dropDownList.addEventListener('click', showList, false);
 
-function showList(params) {
-    showOrHide();
-    getTravelInfo();
+function showList(e) {
     
+    if (e.target.nodeName == "LI") {
+        console.log(e.target.nodeName);
+        ddis.textContent = e.target.textContent;
+    }
+
+    showOrHide();
 }
 
 function showOrHide(){
-    console.log("show or hide");
+
     if (dropDownUl.style.display == ""){
         dropDownUl.style.display = "block";
         

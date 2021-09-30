@@ -44,6 +44,7 @@
     padding-left: 9.5px;
     margin-bottom: 79px;
     user-select: none;
+    cursor: pointer;
 }
 
 .ddis{
@@ -75,18 +76,26 @@
     padding-left: 9.5px;
     user-select: none;
     z-index: 15;
-    animation: growDown 2000ms ease-in-out forwards;
+    animation: growDown 300ms ease-in-out forwards;
     transform-origin: top center;
 }
 
 .dropDownUl > li{
+    width: 461.5px;
     height: 48px;
+    position: relative;
+    left: -9px;
     text-align: center;
     font-family: PingFangTC-Regular;
     font-weight: bold;
     font-size: 18px;
     color: #000000;
     line-height: 48px;   
+    transition: background-color 0.3s;
+}
+
+.dropDownUl > li:hover{
+    background-color: grey;
 }
 
 @keyframes growDown {
