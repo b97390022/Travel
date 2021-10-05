@@ -13,16 +13,19 @@
         <header class="header">
             <h1>高雄旅遊資訊</h1>
 
-            <div id="dropDownList">
-                <span class="ddis">- - 請選擇行政區 - -</span>
-                <img src="images/icons_down.png" alt="" class="dicon">
+            <div class="header-wrap">
+                <div id="dropDownList" tabindex="0">
+                    <span class="dDis">- - 請選擇行政區 - -</span>
+                    <img src="images/icons_down.png" alt="" class="dIcon">
+                </div>
                 <ul class="dropDownUl"></ul>
             </div>
+            
             <div class="hot">
                 <h2>熱門行政區</h2>
-                <ul>
-                    <li>苓雅區</li>
-                    <li>三民區</li>
+                <ul class="hotUl">
+                    <li>左營區</li>
+                    <li>大樹區</li>
                     <li>新興區</li>
                     <li>鹽埕區</li>
                 </ul>
@@ -32,12 +35,40 @@
             <div class="circle"></div>
         </header>
         <main class="main">
-           <h2>三民區</h2>
-           <ul>
-               <li>
-
-               </li>
+           <h2>請選擇行政區</h2>
+           <ul class = "ulList">
+               <!-- <li class="li-1">
+                    <div class = "headerDiv">
+                        <span class="sp-1">高雄願景館</span><span class="sp-2">三民區</span>
+                    </div>
+                    <div class="content">
+                        <div>
+                            <div>
+                                <img class="imgFix" src="images/icons_clock.png" alt="">
+                                <p>週二至週日10:00-18:00，每週一公休</p>
+                            </div>
+                            <div>
+                                <img src="images/icons_pin.png" alt="">
+                                <p>高雄市三民區建國二路318號</p>
+                            </div>
+                            <div>
+                                <img src="images/icons_phone.png" alt="">
+                                <p>886-7-2363357</p>
+                            </div>
+                        </div>
+                        <div>
+                            <img src="images/icons_tag.png" alt="">
+                            <p>免費參觀</p>
+                        </div>
+                    </div>
+               </li> -->
            </ul>
+           <footer class="mainFooter" data-page = "1">
+                <span class="prev"> < prev</span>
+                <ul class = "changePage"></ul>
+                <span class="next">next > </span>
+           </footer>
+           
         </main>
         <footer class="footer">
             <span>高雄旅遊網</span><span>資料來源 : 高雄市政府</span>

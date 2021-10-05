@@ -22,8 +22,6 @@
     align-items: center;
     padding-top: 89px;
     position: relative;
-    /* justify-content: center; */
-    /* background: #424242; */
 }
 
 .header h1{
@@ -32,6 +30,10 @@
     color: #FFFFFF;
     letter-spacing: 3.89px;
     padding-bottom: 96px;
+    user-select: none;
+}
+.header-wrap{
+    position: relative;
 }
 
 #dropDownList {
@@ -40,14 +42,14 @@
     background: rgba(255,255,255,0.70);
     border: 3px solid #FFFFFF;
     border-radius: 3px;
-    position: relative;
     padding-left: 9.5px;
     margin-bottom: 79px;
     user-select: none;
     cursor: pointer;
+    position: relative;
 }
 
-.ddis{
+.dDis{
     position: absolute;
     text-indent: 9.5px;
     top: 15px;
@@ -58,7 +60,7 @@
     line-height: 21px;
 }
 
-.dicon{
+.dIcon{
     position: absolute;
     right: 17px;
     bottom: 17px;
@@ -67,14 +69,13 @@
 .dropDownUl{
     display: none;
     width: 452px;
-    left: -3px;
-    top: 48px;
+    left: 0px;
+    top: 52px;
     background: rgba(255,255,255,0.70);
     border: 3px solid #FFFFFF;
     border-radius: 3px;
     position: absolute;
     padding-left: 9.5px;
-    user-select: none;
     z-index: 15;
     animation: growDown 300ms ease-in-out forwards;
     transform-origin: top center;
@@ -103,7 +104,7 @@
         transform: scaleY(0)
     }
     80% {
-        transform: scaleY(1.1)
+        transform: scaleY(1.2)
     }
     100% {
         transform: scaleY(1)
@@ -116,6 +117,7 @@
     background: #FFFFFF;
     box-shadow: 0 1px 3px 0 rgba(0,0,0,0.20);
     border-radius: 5px;
+    
 }
 
 .hot h2{
@@ -141,6 +143,7 @@
     border-radius: 5px;
     margin-right: 30px;
     user-select: none;
+    cursor: pointer;
 }
 
 .hot ul li:nth-child(1){
@@ -190,7 +193,8 @@
 
 .main{
     display: flex;
-    justify-content: center;
+    align-items: center;
+    flex-direction: column;
     width: 100%;
 }
 
@@ -202,8 +206,146 @@
     margin-bottom: 24px;
 }
 
+.ulList{
+    display: flex;
+    flex-wrap: wrap;
+    width: 944px;
+    gap: 16px;
+}
 
+.ulList li{
+    width: 464px;
+    margin-bottom: 20px;
+    box-shadow: 0 1px 3px 0 rgba(0,0,0,0.20);
+    background: #FFFFFF;
+}
 
+.ulList li > div:nth-child(1){
+    width: 100%;
+    height: 155px;
+    background-size: 100% 100%;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+}
+
+.ulList li > div:nth-child(2){
+    width: 100%;
+    /* background: #FFFFFF; */
+}
+
+.content{
+    position: relative;
+    box-sizing: border-box;
+    padding: 15px 24px 22px 23px;
+
+}
+
+.content > div:nth-child(1){
+    width: 346px;
+}
+
+.content > div > div {
+    display: flex;
+    font-family: AppleSystemUIFont;
+    font-size: 16px;
+    color: #000000;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.content > div:nth-child(2) {
+    position: absolute;
+    left: 346px;
+    display: flex;
+    align-items: flex-end;
+}
+
+.content > div:nth-child(2) img{
+    align-self: flex-end;
+}
+
+.content > div:nth-child(2) p{
+    font-family: PingFangTC-Regular;
+    font-size: 16px;
+    color: #000000;
+    margin-left: 8px;
+}
+
+.content > div > div:nth-child(3) {
+    padding-left: 1.8px;
+}
+
+.content div:nth-child(1) img{
+    margin-right: 9px;
+}
+
+.content div:nth-child(2) img{
+    margin-right: 10px;
+}
+
+.content div:nth-child(3) img{
+    margin-right: 12px;
+}
+
+.content div p{
+   margin-top: 2px;
+}
+
+.sp-1{
+    font-family: SFNSDisplay;
+    font-size: 24px;
+    color: #FFFFFF;
+    margin-left: 22px;
+    margin-bottom: 14px;
+}
+
+.sp-2{
+    font-family: PingFangTC-Regular;
+    font-size: 16px;
+    color: #FFFFFF;
+    margin-right: 24px;
+    margin-bottom: 11px;
+}
+
+.imgFix{
+    align-self: flex-start;
+}
+
+.mainFooter{
+    display: none;
+    align-items: center;
+    justify-content: center;
+    font-family: AppleSystemUIFont;
+    font-size: 14px;
+    color: #4A4A4A;
+    margin-top: 49px;
+    margin-bottom: 41px;
+    user-select: none;
+}
+
+.mainFooter li {
+    cursor: pointer;
+    display: inline;
+    margin: 0px 8px;
+}
+
+.prev{
+    margin-right: 26px;
+    cursor: pointer;
+}
+.next{
+    margin-left: 34.5px;
+    cursor: pointer;
+}
+.focus{
+    color: #559AC8;
+}
+
+.cantSelect{
+    color: rgba(73,73,73,0.50);
+    cursor: auto;
+}
 
 .footer{
     height: 90px;
