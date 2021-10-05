@@ -252,20 +252,22 @@ function renderPage(target, count) {
 
 function switchPage(e) {
 
+    let arr = changePage.getElementsByTagName('li');
+    let nIdx = findFocusClassIndex(arr);
+    let target = selectedSection.textContent;
+
+
     if (e.target.nodeName == "LI") {
-        let target = selectedSection.textContent;
+
+        if (parseInt(nIdx)+1 == e.target.textContent)  {return}
+        
         renderPage(target, e.target.textContent);
         changeFocus(e.target.dataset.index);
         changePrevNext(e.target.dataset.index);
 
     } else if (e.target.nodeName == "SPAN") {
-        
-        let arr = changePage.getElementsByTagName('li');
-        let target = selectedSection.textContent;
 
         if (arr.length == 1) {return}
-
-        let nIdx = findFocusClassIndex(arr);
  
         let nNode = document.querySelector(`.changePage > li:nth-child(${parseInt(nIdx)+1})`);
         
