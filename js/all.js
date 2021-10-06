@@ -1,5 +1,5 @@
-// const apiUrl = "https://api.kcg.gov.tw/api/service/get/9c8e1450-e833-499c-8320-29b36b7ace5c"
-const apiUrI = "https://raw.githubusercontent.com/hexschool/KCGTravel/master/datastore_search.json"
+const apiUrI = "https://api.kcg.gov.tw/api/service/get/9c8e1450-e833-499c-8320-29b36b7ace5c"
+// const apiUrI = "https://raw.githubusercontent.com/hexschool/KCGTravel/master/datastore_search.json"
 var dropDownList = document.querySelector("#dropDownList");
 var dropDownUl = document.querySelector(".dropDownUl");
 var triangle = document.querySelector('.dIcon');
@@ -9,7 +9,7 @@ var ulList = document.querySelector(".ulList");
 var hotUl = document.querySelector(".hotUl");
 var changePage = document.querySelector(".changePage");
 var mainFooter = document.querySelector(".mainFooter");
-var dic = JSON.parse(localStorage.getItem("dicData")) || {};
+var dic = JSON.parse(localStorage.getItem("listData")) || {};
 var selectedSection = document.querySelector('.main > h2');
 var prev = document.querySelector('.prev');
 var next = document.querySelector('.next');
@@ -32,28 +32,11 @@ function hotChange(e) {
         dDis.textContent = e.target.textContent;
         mainH2.textContent = e.target.textContent;
 
-        createList(e.target.textContent);
+        renderPage(e.target.textContent, 1);
+        // render changepage footer
+        renderMainFooter(dic[e.target.textContent].length);
     }
 
-}
-
-function createLiDropDown(list) {
-    //this is for defining the dropdownlist element
-    let listLength = list.length;
-    let setionSet = new Set();
-
-    for (let i =0; i < listLength; i++) {
-        let candidate = list[i].Zone;
-
-        if (setionSet.has(candidate)){
-            continue;
-        }
-
-        setionSet.add(candidate);
-        var liNode = document.createElement('li');
-        liNode.textContent = candidate;
-        dropDownUl.appendChild(liNode);
-    }
 }
 
 function liEvent(e) {
@@ -61,7 +44,10 @@ function liEvent(e) {
         
         dDis.textContent = e.target.textContent;
         mainH2.textContent = e.target.textContent;
-        createList(e.target.textContent);
+
+        renderPage(e.target.textContent, 1);
+        // render changepage footer
+        renderMainFooter(dic[e.target.textContent].length);
         dropDownUl.classList.remove("opened");
     }
 }
@@ -97,15 +83,44 @@ function getTravelInfo() {
         return data;
     })
     .then((data) => {
-        createLiDropDown(data.result.records);
-        localStorage.setItem("listData", JSON.stringify(data.result));
+        
+        createListData(data.data.XML_Head.Infos.Info);
+        createLiDropDown(Object.keys(dic));
     });
 }
 
-function createList(target) {
-    let data = JSON.parse(localStorage.getItem("listData")).records;
-    let dataLength = data.length;
-    let dicSector = [];
+function createListData(records) {
+    let dicData = {};
+    
+    let re = new RegExp('..區');
+
+    for (let record of records) {
+        let zone = re.exec(record.Add)[0]
+
+        if (zone in dicData) {
+            dicData[zone].push(record);
+        } else{
+            dicData[zone] = [record];
+        }
+    }
+
+    localStorage.setItem("listData", JSON.stringify(dicData));
+}
+
+function createLiDropDown(list) {
+    //this is for defining the dropdownlist element
+    let listLength = list.length;
+
+    for (let i =0; i < listLength; i++) {
+
+        var liNode = document.createElement('li');
+        liNode.textContent = list[i];
+        dropDownUl.appendChild(liNode);
+    }
+}
+
+function createNode(data, target) {
+
     const imgArr = ["images/icons_clock.png","images/icons_pin.png","images/icons_phone.png"]
 
     function addInner(time, addr, tel) {
@@ -129,54 +144,47 @@ function createList(target) {
         return divNode11;
     }
 
-    ulList.innerHTML = "";
+    // 票價資訊
+    tickitInfo = data.Ticketinfo;
 
-    for (let i =0; i < dataLength; i++) {
-        if (target == data[i].Zone) {
+    var liNode = document.createElement('li');
+    // liNode.classList.add('li-'+i);
+    var divRoot = document.createElement('div');
+    var divNode = document.createElement('div');
+    divNode.style.background = 'url('+data.Picture1+')';
+    var spNode1 = document.createElement('span');
+    var spNode2 = document.createElement('span');
+    spNode1.classList.add('sp-1');
+    spNode2.classList.add('sp-2');
 
-            tickitInfo = data[i].Ticketinfo;
-            var liNode = document.createElement('li');
-            // liNode.classList.add('li-'+i);
-            var divRoot = document.createElement('div');
-            var divNode = document.createElement('div');
-            divNode.style.background = 'url('+data[i].Picture1+')';
-            var spNode1 = document.createElement('span');
-            var spNode2 = document.createElement('span');
-            spNode1.classList.add('sp-1');
-            spNode2.classList.add('sp-2');
-            spNode1.textContent = data[i].Name;
-            spNode2.textContent = target;
-            divNode.appendChild(spNode1);
-            divNode.appendChild(spNode2);
-            liNode.appendChild(divNode);
+    // 景點名稱
+    spNode1.textContent = data.Name;
 
-            //next part
-            divRoot = document.createElement('div');
-            divRoot.classList.add('content');
+    spNode2.textContent = target;
+    divNode.appendChild(spNode1);
+    divNode.appendChild(spNode2);
+    liNode.appendChild(divNode);
 
-            divRoot.appendChild(addInner(data[i].Opentime, data[i].Add, data[i].Tel));
+    //next part
+    divRoot = document.createElement('div');
+    divRoot.classList.add('content');
 
-            divNode = document.createElement('div');  
-            var imgNode = document.createElement('img'); 
-            imgNode.setAttribute('src', "images/icons_tag.png");
-            var pNode = document.createElement('p');
-            pNode.textContent = tickitInfo;
-            divNode.appendChild(imgNode);
-            divNode.appendChild(pNode);
+    // create three divs  => 開放時間, 地址, 電話
+    divRoot.appendChild(addInner(data.Opentime, data.Add, data.Tel));
 
-            divRoot.appendChild(divNode);
-            liNode.appendChild(divRoot);
+    divNode = document.createElement('div');  
+    var imgNode = document.createElement('img'); 
+    imgNode.setAttribute('src', "images/icons_tag.png");
+    var pNode = document.createElement('p');
+    pNode.textContent = tickitInfo;
+    divNode.appendChild(imgNode);
+    divNode.appendChild(pNode);
 
-            dicSector.push(liNode.innerHTML);
-        }  
-    }
+    divRoot.appendChild(divNode);
+    liNode.appendChild(divRoot);
 
-
-    dic[target] = dicSector;
+    return liNode;
     
-    localStorage.setItem("dicData", JSON.stringify(dic));
-    renderMainFooter(dic[target].length);
-    renderPage(target, 1);
 }
 
 function renderMainFooter(length) {
@@ -196,7 +204,6 @@ function renderMainFooter(length) {
 
 function changeFocus(index) {
     let length = changePage.getElementsByTagName('li').length;
-    // console.log(length);
 
     for (let i = 0; i < length; i++){
 
@@ -241,11 +248,10 @@ function renderPage(target, count) {
 
     ulList.innerHTML = "";
 
-    let targetArr = JSON.parse(localStorage.getItem("dicData"))[target];
-    
-    for(let i = (count - 1) * 6; i<targetArr.length && i < count * 6;i++){
-        let liNode = document.createElement('li');
-        liNode.innerHTML = targetArr[i];
+    let targetArr = JSON.parse(localStorage.getItem("listData"))[target];
+    // console.log(targetArr);
+    for(let i = (count - 1) * 6; i < targetArr.length && i < count * 6;i++){
+        let liNode = createNode(targetArr[i], target);
         ulList.appendChild(liNode);
     }
 }
