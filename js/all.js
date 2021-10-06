@@ -14,7 +14,7 @@ var selectedSection = document.querySelector('.main > h2');
 var prev = document.querySelector('.prev');
 var next = document.querySelector('.next');
 
-window.addEventListener('load', getTravelInfo(),false);
+window.addEventListener('load', getInfoAndRenderDropDownList(), false);
 
 document.body.addEventListener('click', hideList, false);
 dropDownList.addEventListener('click', showList, false);
@@ -29,6 +29,7 @@ next.addEventListener('click', switchPage, false);
 
 function hotChange(e) {
     if (e.target.nodeName == "LI") {
+        let dic = JSON.parse(localStorage.getItem("listData"));
         dDis.textContent = e.target.textContent;
         mainH2.textContent = e.target.textContent;
 
@@ -41,7 +42,7 @@ function hotChange(e) {
 
 function liEvent(e) {
     if (e.target.nodeName == "LI") {
-        
+        let dic = JSON.parse(localStorage.getItem("listData"));
         dDis.textContent = e.target.textContent;
         mainH2.textContent = e.target.textContent;
 
@@ -74,19 +75,21 @@ function hideList(e) {
 
 }
 
-
-function getTravelInfo() {
+function getTravelInfo(){
     //fetch result and store in localstorage
-    fetch(apiUrI)
+    return fetch(apiUrI)
     .then((res) => {
         const data = res.json();
         return data;
     })
-    .then((data) => {
-        
+    .then((data) => {       
         createListData(data.data.XML_Head.Infos.Info);
-        createLiDropDown(Object.keys(dic));
     });
+};
+
+async function getInfoAndRenderDropDownList() {
+    const ret1 = await getTravelInfo();
+    const ret2 = createLiDropDown();
 }
 
 function createListData(records) {
@@ -107,8 +110,11 @@ function createListData(records) {
     localStorage.setItem("listData", JSON.stringify(dicData));
 }
 
-function createLiDropDown(list) {
+function createLiDropDown() {
     //this is for defining the dropdownlist element
+
+    let dicData = JSON.parse(localStorage.getItem("listData"));
+    let list = Object.keys(dicData);
     let listLength = list.length;
 
     for (let i =0; i < listLength; i++) {
