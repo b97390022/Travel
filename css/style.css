@@ -250,7 +250,7 @@
     font-family: AppleSystemUIFont;
     font-size: 16px;
     color: #000000;
-    align-items: center;
+    align-items: flex-start;
     margin-bottom: 16px;
 }
 
@@ -258,18 +258,19 @@
     position: absolute;
     left: 346px;
     display: flex;
-    align-items: flex-end;
+    align-items: flex-start;
 }
 
-.content > div:nth-child(2) img{
+/* .content > div:nth-child(2) img{
     align-self: flex-end;
-}
+} */
 
 .content > div:nth-child(2) p{
     font-family: PingFangTC-Regular;
     font-size: 16px;
     color: #000000;
     margin-left: 8px;
+    width: 66px;
 }
 
 .content > div > div:nth-child(3) {
@@ -280,7 +281,7 @@
     margin-right: 9px;
 }
 
-.content div:nth-child(2) img{
+.content > div:nth-child(1) > div:nth-child(2) img{
     margin-right: 10px;
 }
 

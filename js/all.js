@@ -260,6 +260,8 @@ function renderPage(target, count) {
         let liNode = createNode(targetArr[i], target);
         ulList.appendChild(liNode);
     }
+
+    reSizing();
 }
 
 function switchPage(e) {
@@ -326,12 +328,17 @@ const resizeObserver = new ResizeObserver(entries => {
 
     for (let entry of entries) {
         
+
         let liNodes = document.querySelectorAll('.content > div:nth-child(1) > div:nth-child(3) > p');
         let divNodes = document.querySelectorAll('.content > div:nth-child(2)');
 
         for (let i=0; i< liNodes.length; i++) {
 
+
             divNodes[i].style.top = liNodes[i].offsetTop+'px';
+
+            // console.log(divNodes[i].clientHeight)
+            // console.log(entry.contentRect)
         }
 
     }
@@ -340,3 +347,19 @@ const resizeObserver = new ResizeObserver(entries => {
   });
   
   resizeObserver.observe(ulList);
+
+  function reSizing(params) {
+
+    let liNodes = document.querySelectorAll('.content > div:nth-child(1) > div:nth-child(3) > p');
+    let divNodes = document.querySelectorAll('.content > div:nth-child(2)');
+
+    for (let i=0; i< liNodes.length; i++) {
+
+        if (divNodes[i].clientHeight > 20) {
+            liNodes[i].style.height = (parseInt(liNodes[i].clientHeight) + parseInt(divNodes[i].clientHeight)) +'px';
+        }
+        // console.log(divNodes[i].clientHeight)
+        // console.log(entry.contentRect)
+    }
+
+  }
