@@ -247,7 +247,11 @@ function changePrevNext(index) {
     } else if (index == length-1) {
         prev.classList.remove('cantSelect');
         next.classList.add('cantSelect');
+    } else{
+        prev.classList.remove('cantSelect');
+        next.classList.remove('cantSelect');
     }
+
 }
 
 function renderPage(target, count) {
@@ -309,6 +313,7 @@ function switchPage(e) {
             prev.classList.remove('cantSelect');
             next.classList.remove('cantSelect');
         }
+        
     }
 }
 
@@ -333,12 +338,7 @@ const resizeObserver = new ResizeObserver(entries => {
         let divNodes = document.querySelectorAll('.content > div:nth-child(2)');
 
         for (let i=0; i< liNodes.length; i++) {
-
-
             divNodes[i].style.top = liNodes[i].offsetTop+'px';
-
-            // console.log(divNodes[i].clientHeight)
-            // console.log(entry.contentRect)
         }
 
     }
@@ -358,8 +358,5 @@ const resizeObserver = new ResizeObserver(entries => {
         if (divNodes[i].clientHeight > 20) {
             liNodes[i].style.height = (parseInt(liNodes[i].clientHeight) + parseInt(divNodes[i].clientHeight)) +'px';
         }
-        // console.log(divNodes[i].clientHeight)
-        // console.log(entry.contentRect)
     }
-
   }
