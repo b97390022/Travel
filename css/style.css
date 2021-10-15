@@ -79,6 +79,8 @@
     z-index: 15;
     animation: growDown 300ms ease-in-out forwards;
     transform-origin: top center;
+    height: 300px;
+    overflow-x: hidden;
 }
 
 .dropDownUl > li{

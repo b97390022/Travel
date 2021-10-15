@@ -29,6 +29,7 @@ next.addEventListener('click', switchPage, false);
 
 function hotChange(e) {
     if (e.target.nodeName == "LI") {
+        if (e.target.textContent == mainH2.textContent) {return}
         let dic = JSON.parse(localStorage.getItem("listData"));
         dDis.textContent = e.target.textContent;
         mainH2.textContent = e.target.textContent;
@@ -69,7 +70,7 @@ function showList(e) {
 
 }
 
-function hideList(e) {
+function hideList() {
     triangle.style.transform = "rotate(0deg)"
     dropDownUl.style.display = "";
 
@@ -83,7 +84,7 @@ function getTravelInfo(){
         return data;
     })
     .then((data) => {       
-        createListData(data.data.XML_Head.Infos.Info);
+        return createListData(data.data.XML_Head.Infos.Info);
     });
 };
 
@@ -96,6 +97,7 @@ function createListData(records) {
     let dicData = {};
     
     let re = new RegExp('..區');
+    
 
     for (let record of records) {
         let zone = re.exec(record.Add)[0]
@@ -342,13 +344,11 @@ const resizeObserver = new ResizeObserver(entries => {
         }
 
     }
-  
-    console.log('Size changed');
   });
   
   resizeObserver.observe(ulList);
 
-  function reSizing(params) {
+  function reSizing() {
 
     let liNodes = document.querySelectorAll('.content > div:nth-child(1) > div:nth-child(3) > p');
     let divNodes = document.querySelectorAll('.content > div:nth-child(2)');
